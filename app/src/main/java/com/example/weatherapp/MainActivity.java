@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 String descrition=weatherObject.getString("description");
                 cc.setText(descrition);
                 weatherReport.setText(descrition);
+                setBackground(descrition);//set bacground
                 JSONObject jsonObject1=jsonObject.getJSONObject("main");
                 String temp_min=jsonObject1.getString("temp_min").toString();
                 String max_temp=jsonObject1.getString("temp_max").toString();
@@ -147,4 +149,25 @@ public class MainActivity extends AppCompatActivity {
         call("Patna");
         searchCity();
     }
+     private void setBackground(String description){
+         LottieAnimationView lottieAnimationView=findViewById(R.id.lottieAnimationView);
+         if(description.contains("rain")) {
+             findViewById(R.id.main).setBackgroundResource(R.drawable.rain_background);
+             lottieAnimationView.setAnimation(R.raw.rain);
+             lottieAnimationView.playAnimation();
+         }
+         else if(description.contains("cloud")||description.contains("haze")||description.contains("mist")) {
+             findViewById(R.id.main).setBackgroundResource(R.drawable.colud_background);
+             lottieAnimationView.setAnimation(R.raw.cloud);
+             lottieAnimationView.playAnimation();
+         }else if(description.contains("snow")){
+             findViewById(R.id.main).setBackgroundResource(R.drawable.snow_background);
+             lottieAnimationView.setAnimation(R.raw.snow);
+             lottieAnimationView.playAnimation();
+         }else {
+             findViewById(R.id.main).setBackgroundResource(R.drawable.sunny_background);
+             lottieAnimationView.setAnimation(R.raw.sun);
+             lottieAnimationView.playAnimation();
+         }
+     }
 }
