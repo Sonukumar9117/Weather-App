@@ -18,6 +18,6 @@ public class CurrentLocation {
     FusedLocationProviderClient fusedLocationProviderClient;
 
     public  String cityName(){
-
+     return null;
     }
 }
